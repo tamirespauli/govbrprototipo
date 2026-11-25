@@ -491,6 +491,14 @@ html,body{overflow-x:hidden}.panel{min-width:0}#tasks{min-width:0}
 .tmb:focus{outline:none}
 .tmgo button:focus-visible,.tmgo a:focus-visible{outline:3px solid #17305F;outline-offset:3px;box-shadow:none}
 .teamlink{margin-bottom:6px}
+.iab{max-height:calc(100vh - 40px);overflow:auto}.iab h2{font-size:clamp(24px,2.6vw,30px);font-weight:900;letter-spacing:-.03em;margin:6px 0 8px;line-height:1.1}
+.iab>p{margin:0 0 14px;color:#3D4756;line-height:1.6;font-size:15px}
+.iag{display:grid;gap:10px;margin:0 0 18px}.iag section{background:#EEF3FC;border-radius:18px;padding:14px 16px}
+.iag h3{margin:0 0 4px;font-size:14px;font-weight:900;color:#17305F;display:flex;align-items:center;gap:8px}.iag h3::before{content:"";width:9px;height:9px;border-radius:50%;background:#FFCD07;flex:none}
+.iag p{margin:0;font-size:14.5px;line-height:1.6;color:#2A3342}
+.iab .iaok{width:100%;border-radius:999px;padding:13px 18px;font-weight:800;font-size:15px;border:0;background:#FFCD07;color:#14181F;cursor:pointer}
+.iab .iaok:focus-visible{outline:3px solid #17305F;outline-offset:3px}
+.teamsep{color:#8A94A6;margin:0 4px}
 /* modal de integrantes */
 .tm{position:fixed;inset:0;z-index:100;display:none;place-items:center;padding:18px;background:rgba(20,30,55,.55)}
 .tm.open{display:grid}
@@ -516,7 +524,7 @@ html,body{overflow-x:hidden}.panel{min-width:0}#tasks{min-width:0}
   <aside class="panel" id="left" aria-label="Painel de demonstração">
     <div class="brandline"><img class="plogo" id="plogo" alt="gov.br" width="104" height="37"><div><div class="eyebrow">Projeto acadêmico · Metodologia de Projeto de Design</div><h2 class="ptitle">Redesign GOV.BR</h2></div></div>
     <p class="sub">Protótipo para pessoas com 60 anos ou mais. Todos os dados são fictícios.</p>
-    <button class="teamlink" id="teamBtn">Ver integrantes do grupo</button>
+    <button class="teamlink" id="teamBtn">Ver integrantes do grupo</button> <span class="teamsep" aria-hidden="true">·</span> <button class="teamlink" data-ia>Declaração de uso de IA</button>
     <h3 class="psec">Tarefas para demonstrar</h3>
     <div id="tasks"></div>
     <h3 class="psec">Medidor de esforço</h3>
@@ -585,6 +593,14 @@ html,body{overflow-x:hidden}.panel{min-width:0}#tasks{min-width:0}
   </aside>
 </div>
 
+<div class="tm" id="ia" role="dialog" aria-modal="true" aria-labelledby="iaT"><div class="tmb iab">
+ <button class="tmx" id="iaX" aria-label="Fechar">×</button>
+ <div class="eyebrow kick" style="font-size:11px;font-weight:800;letter-spacing:.12em;color:#2D5090;text-transform:uppercase">Transparência</div>
+ <h2 id="iaT">Declaração de uso de inteligência artificial</h2>
+ <p>O protótipo foi desenvolvido com apoio de inteligência artificial na parte de programação. As decisões de design e o conteúdo partem do trabalho do grupo.</p>
+ <div class="iag"><section><h3>Feito pelo grupo, de forma manual e conjunta</h3><p>Briefing, pesquisa, dinâmica dos papéis, painéis, diretrizes, conceitos e os 13 sketches das alternativas. Foi esse material que definiu as telas, os fluxos e as funcionalidades do protótipo. A logo oficial do gov.br foi fornecida pelo grupo.</p></section><section><h3>Claude (Anthropic)</h3><p>Usado para programar o protótipo em HTML, CSS e JavaScript a partir dos sketches, das diretrizes e das decisões do grupo, e para ajustar os temas, os tamanhos de texto (ABNT NBR 17225), a apresentação ao redor do telefone e os testes de funcionamento.</p></section><section><h3>Dados e responsabilidade</h3><p>Todos os dados exibidos são fictícios. O grupo acompanhou e aprovou cada ajuste e responde pelo resultado.</p></section></div>
+ <button class="iaok" id="iaOk">Entendi</button>
+</div></div>
 <div class="tm" id="tm" role="dialog" aria-modal="true" aria-labelledby="tmT"><div class="tmb">
   <button class="tmx" id="tmX" aria-label="Fechar">×</button>
   <div class="eyebrow">Identificação do grupo</div>
@@ -592,7 +608,7 @@ html,body{overflow-x:hidden}.panel{min-width:0}#tasks{min-width:0}
   <p>Redesign do aplicativo GOV.BR com foco em acessibilidade digital para pessoas com 60 anos ou mais.</p>
   <ul class="tml"><li><i>AP</i>Amanda Mellies Pegoretti</li><li><i>LS</i>Luana Caroline Schneider</li><li><i>TS</i>Tamires Pauli Soares</li><li><i>YX</i>Yasmin Gabriele Xavier</li></ul>
   <dl class="tmd"><div><dt>Disciplina</dt><dd>Metodologia de Projeto de Design</dd></div><div><dt>Professor</dt><dd>Renato Valderramas</dd></div><div><dt>Instituição</dt><dd>FURB, Blumenau/SC · 2026/2</dd></div></dl>
-  <div class="tmgo"><button class="pr" id="tmGo">Abrir o protótipo</button><a class="sc" href="https://drive.google.com/drive/folders/1N8jN5qp8F6WQZMXpP4vmQhTHP3ln4mXE?usp=sharing" target="_blank" rel="noopener">Pasta no Drive ↗</a></div>
+  <div class="tmgo"><button class="pr" id="tmGo">Abrir o protótipo</button><button class="sc" data-ia>Uso de IA</button><a class="sc" href="https://drive.google.com/drive/folders/1N8jN5qp8F6WQZMXpP4vmQhTHP3ln4mXE?usp=sharing" target="_blank" rel="noopener">Pasta no Drive ↗</a></div>
 </div></div>
 
 <script>
@@ -1205,6 +1221,14 @@ tm.addEventListener("click",e=>{if(e.target===tm)close()});
 addEventListener("keydown",e=>{if(e.key==="Escape"&&tm.classList.contains("open"))close()});
 const tb=document.getElementById("teamBtn");if(tb)tb.onclick=open;
 open();})();
+/* modal uso de IA */
+(()=>{const m=document.getElementById("ia");if(!m)return;let last;
+const open=()=>{last=document.activeElement;const o=document.getElementById("tm");o&&o.classList.remove("open");m.classList.add("open");const b=m.querySelector(".tmb");b.setAttribute("tabindex","-1");b.focus()};
+const close=()=>{m.classList.remove("open");last&&last.focus&&last.focus()};
+document.getElementById("iaX").onclick=close;document.getElementById("iaOk").onclick=close;
+m.addEventListener("click",e=>{if(e.target===m)close()});
+addEventListener("keydown",e=>{if(e.key==="Escape"&&m.classList.contains("open"))close()});
+document.querySelectorAll("[data-ia]").forEach(b=>b.addEventListener("click",open));})();
 </script>
 </body>
 </html>
